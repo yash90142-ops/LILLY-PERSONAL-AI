@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LILLY AI Assistant</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#101323;color:white;
+    font-family:Arial,sans-serif;min-height:100vh;
+      display:flex;justify-content:center;
+      }
+      .app{width:100%;max-width:700px;padding:20px;display:flex;flex-direction:column;min-height:100vh}
+      header{text-align:center;padding:25px 10px}
+      .logo{
+        width:75px;height:75px;border-radius:50%;
+          margin:auto;background:linear-gradient(135deg,#a78bfa,#38bdf8);
+            display:grid;place-items:center;font-size:34px;font-weight:bold;color:#101323;
+              box-shadow:0 0 35px #8b5cf688;
+              }
+              h1{letter-spacing:5px;margin:15px 0 5px}
+              .sub{color:#aab1c8;font-size:14px}
+              .status{color:#70e6ae;font-size:13px;margin-top:12px}
+              .chat{
+                flex:1;background:#191e32;border:1px solid #303852;
+                  border-radius:18px;padding:16px;overflow-y:auto;min-height:300px;
+                  }
+                  .msg{padding:13px 15px;border-radius:15px;margin:10px 0;line-height:1.5;max-width:88%;white-space:pre-wrap}
+                  .bot{background:#29314b;align-self:flex-start}
+                  .user{background:#6555c9;margin-left:auto}
+                  .input-area{display:flex;gap:8px;margin-top:15px}
+                  input{
+                    flex:1;min-width:0;padding:15px;border-radius:14px;
+                      border:1px solid #424b68;background:#202740;color:white;font-size:16px;
+                      }
+                      button{
+                        border:0;border-radius:13px;padding:12px 16px;
+                          background:#8170ee;color:white;font-size:16px;font-weight:bold;
+                          }
+                          button:active{opacity:.7}
+                          footer{text-align:center;color:#858da8;font-size:12px;padding:15px}
+                          </style>
+                          </head>
+                          <body>
+                          <div class="app">
+                          <header>
+                            <div class="logo">L</div>
+                              <h1>LILLY</h1>
+                                <div class="sub">YOUR PERSONAL AI ASSISTANT</div>
+                                  <div class="status">● Ready to help you</div>
+                                  </header>
+
+                                  <div class="chat" id="chat">
+                                    <div class="msg bot">Hello! 👋 Main LILLY hoon. Aaj main aapki kya help kar sakti hoon?</div>
+                                    </div>
+
+                                    <div class="input-area">
+                                      <input id="message" placeholder="Message LILLY..." />
+                                        <button onclick="sendMessage()">➤</button>
+                                          <button onclick="voiceInput()">🎙️</button>
+                                          </div>
+                                          <footer>LILLY AI · Your ideas, my assistance ❤️</footer>
+                                          </div>
+
+                                          <script>
+                                          function sendMessage(){
+                                            const input=document.getElementById("message");
+                                              const text=input.value.trim();
+                                                if(!text)return;
+                                                  addMessage(text,"user");
+                                                    input.value="";
+                                                      setTimeout(()=>{
+                                                          addMessage("Aapka message mil gaya! ❤️ Abhi main apne basic demo mode mein hoon. AI connection agle step mein jodenge.","bot");
+                                                            },500);
+                                                            }
+                                                            function addMessage(text,type){
+                                                              const chat=document.getElementById("chat");
+                                                                const div=document.createElement("div");
+                                                                  div.className="msg "+type;
+                                                                    div.textContent=text;
+                                                                      chat.appendChild(div);
+                                                                        chat.scrollTop=chat.scrollHeight;
+                                                                        }
+                                                                        function voiceInput(){
+                                                                          const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+                                                                            if(!SpeechRecognition){
+                                                                                alert("Voice input is not supported in this browser.");
+                                                                                    return;
+                                                                                      }
+                                                                                        const recognition=new SpeechRecognition();
+                                                                                          recognition.lang="hi-IN";
+                                                                                            recognition.onresult=(event)=>{
+                                                                                                document.getElementById("message").value=event.results[0][0].transcript;
+                                                                                                  };
+                                                                                                    recognition.start();
+                                                                                                    }
+                                                                                                    document.getElementById("message").addEventListener("keydown",e=>{
+                                                                                                      if(e.key==="Enter")sendMessage();
+                                                                                                      });
+                                                                                                      </script>
+                                                                                                      </body>
+                                                                                                      </html>
+                                                                                                      
